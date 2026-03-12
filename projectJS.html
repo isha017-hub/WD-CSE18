@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // marks stored in variables
+let m1 = 70;
+let m2 = 80;
+let m3 = 75;
+let m4 = 90;
+let m5 = 85;
+
+// array
+let marks = [m1, m2, m3, m4, m5];
+
+let sum = 0;
+let avg;
+
+// loop
+for (let i = 0; i < 5; i++) {
+
+    // condition
+    if (marks[i] >= 0 && marks[i] <= 100) {
+        sum = sum + marks[i];
+    } 
+    else {
+        console.log("Invalid marks");
+    }
+
+}
+
+// average
+avg = sum / 5;
+
+// marks = avg
+marks = avg;
+
+console.log("Average Marks = " + marks);
+    </script>
+    
+</body>
+</html>
