@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Amazon Premium Clone</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#eaeded;
+}
+
+
+/* NAVBAR */
+
+.navbar{
+
+background:#131921;
+
+display:flex;
+
+justify-content:
+space-between;
+
+align-items:center;
+
+padding:15px;
+
+color:white;
+
+flex-wrap:wrap;
+
+}
+
+.logo{
+
+font-size:40px;
+
+font-weight:bold;
+
+color:#ff9900;
+
+}
+
+
+.search{
+
+display:flex;
+
+width:50%;
+
+}
+
+
+.search input{
+
+width:100%;
+
+padding:12px;
+
+border:none;
+
+outline:none;
+
+}
+
+
+.search button{
+
+padding:12px;
+
+background:#febd69;
+
+border:none;
+
+cursor:pointer;
+
+}
+
+
+.nav-right{
+
+display:flex;
+
+gap:20px;
+
+}
+
+
+
+/* MENU */
+
+.menu{
+
+background:#232f3e;
+
+display:flex;
+
+gap:20px;
+
+padding:12px;
+
+color:white;
+
+overflow:auto;
+
+}
+
+.menu div:hover{
+
+color:orange;
+
+cursor:pointer;
+
+}
+
+
+
+/* HERO */
+
+.hero{
+
+height:450px;
+
+background:
+url(
+"https://images.unsplash.com/photo-1607082350899-7e105aa886ae?q=80&w=1800"
+);
+
+background-size:cover;
+
+background-position:center;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+font-size:55px;
+
+font-weight:bold;
+
+color:white;
+
+text-shadow:
+2px 2px 20px black;
+
+}
+
+
+
+/* CATEGORY */
+
+.categories{
+
+display:flex;
+
+gap:15px;
+
+padding:20px;
+
+background:white;
+
+overflow:auto;
+
+}
+
+
+.categories button{
+
+padding:15px 25px;
+
+border:none;
+
+background:#232f3e;
+
+color:white;
+
+border-radius:20px;
+
+cursor:pointer;
+
+}
+
+
+.categories button:hover{
+
+background:orange;
+
+}
+
+
+
+/* PRODUCTS */
+
+.products{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(
+250px,
+1fr
+)
+);
+
+gap:20px;
+
+padding:30px;
+
+}
+
+
+
+.card{
+
+background:white;
+
+padding:15px;
+
+border-radius:10px;
+
+transition:.3s;
+
+text-align:center;
+
+}
+
+
+.card:hover{
+
+transform:
+translateY(-10px);
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.2);
+
+}
+
+
+.card img{
+
+width:100%;
+
+height:250px;
+
+object-fit:cover;
+
+border-radius:10px;
+
+}
+
+
+.price{
+
+font-size:24px;
+
+font-weight:bold;
+
+margin:10px;
+
+}
+
+
+button{
+
+padding:12px;
+
+border:none;
+
+background:#ffd814;
+
+cursor:pointer;
+
+width:100%;
+
+margin-top:10px;
+
+}
+
+
+button:hover{
+
+background:orange;
+
+}
+
+
+
+
+/* FOOTER */
+
+.footer{
+
+background:#131921;
+
+color:white;
+
+padding:40px;
+
+text-align:center;
+
+}
+
+
+
+</style>
+
+</head>
+
+
+
+
+<body>
+
+
+
+<div class="navbar">
+
+
+<div class="logo">
+
+amazon
+
+</div>
+
+
+
+<div class="search">
+
+<input
+id="search"
+placeholder="Search Products">
+
+<button
+onclick="searchProduct()">
+
+Search
+
+</button>
+
+</div>
+
+
+
+<div class="nav-right">
+
+<div>
+
+Hello Sign In
+
+</div>
+
+
+
+<div>
+
+Orders
+
+</div>
+
+
+
+<div>
+
+🛒 Cart:
+
+<span id="cart">
+
+0
+
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+<div class="menu">
+
+<div>
+
+Today's Deals
+
+</div>
+
+
+<div>
+
+Mobiles
+
+</div>
+
+
+<div>
+
+Electronics
+
+</div>
+
+
+<div>
+
+Fashion
+
+</div>
+
+
+<div>
+
+Beauty
+
+</div>
+
+
+<div>
+
+Gaming
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="hero">
+
+Big Billion Sale 2026 🔥
+
+<br>
+
+Up To 80% OFF
+
+</div>
+
+
+
+
+
+
+
+
+<div class="categories">
+
+
+<button
+onclick="filterProducts('all')">
+
+All
+
+</button>
+
+
+
+<button
+onclick="filterProducts('electronics')">
+
+Electronics
+
+</button>
+
+
+
+<button
+onclick="filterProducts('fashion')">
+
+Fashion
+
+</button>
+
+
+
+<button
+onclick="filterProducts('beauty')">
+
+Beauty
+
+</button>
+
+
+
+<button
+onclick="filterProducts('gaming')">
+
+Gaming
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="products">
+
+
+
+<div class="card electronics">
+
+<img src=
+"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9">
+
+<h3>
+
+iPhone
+
+</h3>
+
+<p class="price">
+
+₹80,000
+
+</p>
+
+<button onclick="addCart()">
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+<div class="card electronics">
+
+<img src=
+"https://images.unsplash.com/photo-1496181133206-80ce9b88a853">
+
+<h3>
+
+Laptop
+
+</h3>
+
+<p class="price">
+
+₹55,000
+
+</p>
+
+<button onclick="addCart()">
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+
+<div class="card electronics">
+
+<img src=
+"https://images.unsplash.com/photo-1593784991095-a205069470b6">
+
+<h3>
+
+Smart TV
+
+</h3>
+
+<p class="price">
+
+₹45,000
+
+</p>
+
+<button onclick="addCart()">
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+
+
+<div class="card electronics">
+
+<img src=
+"https://images.unsplash.com/photo-1516035069371-29a1b244cc32">
+
+<h3>
+
+Camera
+
+</h3>
+
+<p class="price">
+
+₹35,000
+
+</p>
+
+<button onclick="addCart()">
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+
+
+<div class="card fashion">
+
+<img src=
+"https://images.unsplash.com/photo-1542291026-7eec264c27ff">
+
+<h3>
+
+Shoes
+
+</h3>
+
+<p class="price">
+
+₹3500
+
+</p>
+
+<button onclick="addCart()">
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+
+<div class="card fashion">
+
+<img src=
+"https://images.unsplash.com/photo-1503341504253-dff4815485f1">
+
+<h3>
+
+Hoodie
+
+</h3>
+
+<p class="price">
+
+₹899
+
+</p>
+
+<button onclick="addCart()">
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+
+
+<div class="card beauty">
+
+<img src=
+"https://images.unsplash.com/photo-1596462502278-27bfdc403348">
+
+<h3>
+
+Lipstick
+
+</h3>
+
+<p class="price">
+
+₹799
+
+</p>
+
+<button onclick="addCart()">
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+
+
+<div class="card beauty">
+
+<img src=
+"https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
+
+<h3>
+
+Skin Care
+
+</h3>
+
+<p class="price">
+
+₹1499
+
+</p>
+
+<button onclick="addCart()">
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+
+
+<div class="card gaming">
+
+<img src=
+"https://images.unsplash.com/photo-1606144042614-b2417e99c4e3">
+
+<h3>
+
+Gaming Keyboard
+
+</h3>
+
+<p class="price">
+
+₹2500
+
+</p>
+
+<button onclick="addCart()">
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+
+
+<div class="card gaming">
+
+<img src=
+"https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf">
+
+<h3>
+
+Gaming Mouse
+
+</h3>
+
+<p class="price">
+
+₹1500
+
+</p>
+
+<button onclick="addCart()">
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+
+<div class="card electronics">
+
+<img src=
+"https://images.unsplash.com/photo-1505740420928-5e560c06d30e">
+
+<h3>
+
+Headphones
+
+</h3>
+
+<p class="price">
+
+₹2200
+
+</p>
+
+<button onclick="addCart()">
+
+Add Cart
+
+</button>
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="footer">
+
+<h2>
+
+Amazon Clone
+
+</h2>
+
+<br>
+
+Made By Isha ❤️
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+
+let cart=0;
+
+
+
+function addCart(){
+
+cart++;
+
+document
+.getElementById(
+"cart"
+)
+.innerHTML=
+cart;
+
+}
+
+
+
+function filterProducts(category){
+
+let cards=
+document
+.querySelectorAll(
+".card"
+);
+
+
+cards.forEach(
+
+card=>{
+
+
+if(
+
+category==="all"
+
+||
+
+card.classList.contains(
+category
+)
+
+)
+
+{
+
+card.style.display=
+"block";
+
+}
+
+
+else{
+
+card.style.display=
+"none";
+
+}
+
+
+}
+
+)
+
+}
+
+
+
+
+
+function searchProduct(){
+
+let input=
+
+document
+.getElementById(
+"search"
+)
+
+.value
+
+.toLowerCase();
+
+
+
+let cards=
+
+document
+.querySelectorAll(
+".card"
+);
+
+
+
+cards.forEach(
+
+card=>{
+
+
+let name=
+
+card.innerText
+
+.toLowerCase();
+
+
+
+if(
+
+name.includes(
+input
+)
+
+)
+
+{
+
+card.style.display=
+"block";
+
+}
+
+
+else{
+
+card.style.display=
+"none";
+
+}
+
+
+
+}
+
+)
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
