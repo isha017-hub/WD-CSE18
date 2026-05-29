@@ -1,0 +1,859 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Amazon Real Clone</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+scroll-behavior:smooth;
+}
+
+body{
+background:#eaeded;
+}
+
+/* NAVBAR */
+
+.navbar{
+background:#131921;
+padding:15px 25px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+flex-wrap:wrap;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+font-size:45px;
+font-weight:bold;
+color:#ff9900;
+cursor:pointer;
+}
+
+.search{
+display:flex;
+flex:1;
+max-width:700px;
+}
+
+.search input{
+width:100%;
+padding:14px;
+border:none;
+outline:none;
+font-size:16px;
+border-radius:5px 0 0 5px;
+}
+
+.search button{
+padding:14px 22px;
+border:none;
+background:#febd69;
+cursor:pointer;
+font-size:18px;
+border-radius:0 5px 5px 0;
+}
+
+.nav-right{
+display:flex;
+gap:25px;
+align-items:center;
+color:white;
+}
+
+.nav-item{
+cursor:pointer;
+font-size:17px;
+transition:.3s;
+}
+
+.nav-item:hover{
+color:#ff9900;
+}
+
+/* MENU */
+
+.menu{
+background:#232f3e;
+display:flex;
+gap:30px;
+padding:15px 20px;
+overflow:auto;
+}
+
+.menu div{
+color:white;
+cursor:pointer;
+white-space:nowrap;
+font-size:18px;
+transition:.3s;
+}
+
+.menu div:hover{
+color:orange;
+transform:scale(1.05);
+}
+
+/* HERO */
+
+.hero{
+height:500px;
+background:
+linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+url("https://images.unsplash.com/photo-1607082349566-187342175e2f?q=80&w=1800");
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+color:white;
+}
+
+.hero h1{
+font-size:70px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:30px;
+margin-bottom:20px;
+}
+
+.hero button{
+padding:15px 40px;
+font-size:20px;
+border:none;
+background:#ff9900;
+color:white;
+border-radius:40px;
+cursor:pointer;
+}
+
+.hero button:hover{
+background:#e68a00;
+}
+
+/* PRODUCTS */
+
+.products{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+padding:30px;
+}
+
+.card{
+background:white;
+border-radius:15px;
+overflow:hidden;
+transition:.3s;
+position:relative;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.badge{
+position:absolute;
+top:15px;
+left:15px;
+background:red;
+color:white;
+padding:5px 12px;
+border-radius:20px;
+font-size:13px;
+}
+
+.card-content{
+padding:18px;
+}
+
+.card h3{
+font-size:23px;
+margin-bottom:10px;
+}
+
+.rating{
+color:#ff9900;
+margin-bottom:10px;
+}
+
+.price{
+font-size:24px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.desc{
+font-size:14px;
+line-height:1.5;
+color:#555;
+margin-bottom:15px;
+}
+
+.card button{
+padding:13px;
+width:100%;
+border:none;
+background:#ffd814;
+cursor:pointer;
+font-size:16px;
+border-radius:8px;
+transition:.3s;
+}
+
+.card button:hover{
+background:orange;
+color:white;
+}
+
+/* FOOTER */
+
+.footer{
+background:#131921;
+color:white;
+padding:50px;
+text-align:center;
+margin-top:40px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:45px;
+}
+
+.hero p{
+font-size:22px;
+}
+
+.search{
+width:100%;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+
+<div class="logo">
+amazon
+</div>
+
+<div class="search">
+
+<input
+type="text"
+id="search"
+placeholder="Search Products...">
+
+<button onclick="searchProduct()">
+<i class="fa fa-search"></i>
+</button>
+
+</div>
+
+<div class="nav-right">
+
+<div class="nav-item">
+Hello, Sign In
+</div>
+
+<div class="nav-item"
+onclick="placeOrder()">
+Orders
+</div>
+
+<div class="nav-item">
+🛒 Cart :
+<span id="cart">0</span>
+</div>
+
+</div>
+
+</div>
+
+<!-- MENU -->
+
+<div class="menu">
+
+<div onclick="filterProducts('all')">
+Today's Deals
+</div>
+
+<div onclick="filterProducts('mobiles')">
+Mobiles
+</div>
+
+<div onclick="filterProducts('electronics')">
+Electronics
+</div>
+
+<div onclick="filterProducts('fashion')">
+Fashion
+</div>
+
+<div onclick="filterProducts('beauty')">
+Beauty
+</div>
+
+<div onclick="filterProducts('gaming')">
+Gaming
+</div>
+
+<div onclick="filterProducts('home')">
+Home
+</div>
+
+<div onclick="filterProducts('books')">
+Books
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<h1>
+MEGA SALE 2026 🔥
+</h1>
+
+<p>
+Up To 80% OFF On Premium Products
+</p>
+
+<button onclick="filterProducts('all')">
+Shop Now
+</button>
+
+</div>
+
+<!-- PRODUCTS -->
+
+<div class="products"
+id="products">
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<h2>
+Amazon Real Clone
+</h2>
+
+<p>
+Made By Isha ❤️
+</p>
+
+</div>
+
+<script>
+
+/* PRODUCTS */
+
+const products = [
+
+/* MOBILES */
+
+{
+name:"iPhone 16 Pro",
+category:"mobiles",
+price:"₹1,19,999",
+image:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+rating:"★★★★★",
+desc:"Latest Apple flagship phone."
+},
+
+{
+name:"Samsung Galaxy S24",
+category:"mobiles",
+price:"₹89,999",
+image:"https://images.unsplash.com/photo-1510557880182-3f8f6d0d8c43",
+rating:"★★★★★",
+desc:"Premium Android smartphone."
+},
+
+{
+name:"OnePlus 12",
+category:"mobiles",
+price:"₹59,999",
+image:"https://images.unsplash.com/photo-1580910051074-3eb694886505",
+rating:"★★★★☆",
+desc:"Fast and smooth performance."
+},
+
+{
+name:"Google Pixel",
+category:"mobiles",
+price:"₹69,999",
+image:"https://images.unsplash.com/photo-1598327105666-5b89351aff97",
+rating:"★★★★★",
+desc:"Amazing camera smartphone."
+},
+
+{
+name:"Realme GT",
+category:"mobiles",
+price:"₹34,999",
+image:"https://images.unsplash.com/photo-1512499617640-c74ae3a79d37",
+rating:"★★★★☆",
+desc:"Gaming performance phone."
+},
+
+/* ELECTRONICS */
+
+{
+name:"Gaming Laptop",
+category:"electronics",
+price:"₹79,999",
+image:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+rating:"★★★★★",
+desc:"RTX gaming laptop."
+},
+
+{
+name:"4K Smart TV",
+category:"electronics",
+price:"₹45,999",
+image:"https://images.unsplash.com/photo-1593784991095-a205069470b6",
+rating:"★★★★★",
+desc:"Ultra HD smart TV."
+},
+
+{
+name:"Headphones",
+category:"electronics",
+price:"₹2,499",
+image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+rating:"★★★★★",
+desc:"Wireless premium headphones."
+},
+
+{
+name:"DSLR Camera",
+category:"electronics",
+price:"₹54,999",
+image:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32",
+rating:"★★★★★",
+desc:"Professional photography camera."
+},
+
+{
+name:"Smart Watch",
+category:"electronics",
+price:"₹5,999",
+image:"https://images.unsplash.com/photo-1434494878577-86c23bcb06b9",
+rating:"★★★★☆",
+desc:"Fitness tracking smart watch."
+},
+
+/* FASHION */
+
+{
+name:"Nike Shoes",
+category:"fashion",
+price:"₹3,999",
+image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+rating:"★★★★★",
+desc:"Stylish running shoes."
+},
+
+{
+name:"Hoodie",
+category:"fashion",
+price:"₹999",
+image:"https://images.unsplash.com/photo-1503341504253-dff4815485f1",
+rating:"★★★★☆",
+desc:"Oversized premium hoodie."
+},
+
+{
+name:"T-Shirt",
+category:"fashion",
+price:"₹699",
+image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+rating:"★★★★★",
+desc:"Trending cotton t-shirt."
+},
+
+{
+name:"Denim Jacket",
+category:"fashion",
+price:"₹2,499",
+image:"https://images.unsplash.com/photo-1523398002811-999ca8dec234",
+rating:"★★★★★",
+desc:"Stylish denim jacket."
+},
+
+{
+name:"Sunglasses",
+category:"fashion",
+price:"₹1,299",
+image:"https://images.unsplash.com/photo-1511499767150-a48a237f0083",
+rating:"★★★★☆",
+desc:"Premium stylish sunglasses."
+},
+
+/* BEAUTY */
+
+{
+name:"Lipstick",
+category:"beauty",
+price:"₹799",
+image:"https://images.unsplash.com/photo-1596462502278-27bfdc403348",
+rating:"★★★★★",
+desc:"Luxury waterproof lipstick."
+},
+
+{
+name:"Perfume",
+category:"beauty",
+price:"₹2,499",
+image:"https://images.unsplash.com/photo-1620916566398-39f1143ab7be",
+rating:"★★★★★",
+desc:"Luxury perfume set."
+},
+
+{
+name:"Skin Care Kit",
+category:"beauty",
+price:"₹1,499",
+image:"https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9",
+rating:"★★★★☆",
+desc:"Glow skincare collection."
+},
+
+{
+name:"Face Serum",
+category:"beauty",
+price:"₹899",
+image:"https://images.unsplash.com/photo-1556228578-8c89e6adf883",
+rating:"★★★★★",
+desc:"Vitamin C face serum."
+},
+
+{
+name:"Makeup Kit",
+category:"beauty",
+price:"₹2,999",
+image:"https://images.unsplash.com/photo-1596704017254-9f7a6f4f8b3f",
+rating:"★★★★★",
+desc:"Complete beauty makeup kit."
+},
+
+/* GAMING */
+
+{
+name:"Gaming Keyboard",
+category:"gaming",
+price:"₹2,999",
+image:"https://images.unsplash.com/photo-1606144042614-b2417e99c4e3",
+rating:"★★★★★",
+desc:"RGB gaming keyboard."
+},
+
+{
+name:"Gaming Mouse",
+category:"gaming",
+price:"₹1,499",
+image:"https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf",
+rating:"★★★★★",
+desc:"High speed gaming mouse."
+},
+
+{
+name:"PlayStation 5",
+category:"gaming",
+price:"₹54,999",
+image:"https://images.unsplash.com/photo-1606813907291-d86efa9b94db",
+rating:"★★★★★",
+desc:"Next gen gaming console."
+},
+
+{
+name:"Gaming Chair",
+category:"gaming",
+price:"₹9,999",
+image:"https://images.unsplash.com/photo-1616628182509-6a8c3d4f5b78",
+rating:"★★★★★",
+desc:"Comfortable gaming chair."
+},
+
+{
+name:"VR Headset",
+category:"gaming",
+price:"₹29,999",
+image:"https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac",
+rating:"★★★★☆",
+desc:"Immersive virtual reality."
+},
+
+/* HOME */
+
+{
+name:"Modern Sofa",
+category:"home",
+price:"₹24,999",
+image:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+rating:"★★★★★",
+desc:"Luxury sofa set."
+},
+
+{
+name:"Study Table",
+category:"home",
+price:"₹7,999",
+image:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+rating:"★★★★☆",
+desc:"Wooden study table."
+},
+
+{
+name:"Bed Lamp",
+category:"home",
+price:"₹1,499",
+image:"https://images.unsplash.com/photo-1507473885765-e6ed057f782c",
+rating:"★★★★★",
+desc:"Modern decorative lamp."
+},
+
+{
+name:"Wall Clock",
+category:"home",
+price:"₹999",
+image:"https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c",
+rating:"★★★★☆",
+desc:"Stylish wall clock."
+},
+
+{
+name:"Dining Table",
+category:"home",
+price:"₹19,999",
+image:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",
+rating:"★★★★★",
+desc:"Modern dining table."
+},
+
+/* BOOKS */
+
+{
+name:"Rich Dad Poor Dad",
+category:"books",
+price:"₹399",
+image:"https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
+rating:"★★★★★",
+desc:"Best finance book."
+},
+
+{
+name:"Atomic Habits",
+category:"books",
+price:"₹499",
+image:"https://images.unsplash.com/photo-1512820790803-83ca734da794",
+rating:"★★★★★",
+desc:"Self improvement book."
+},
+
+{
+name:"Ikigai",
+category:"books",
+price:"₹399",
+image:"https://images.unsplash.com/photo-1516979187457-637abb4f9353",
+rating:"★★★★★",
+desc:"Japanese lifestyle book."
+},
+
+{
+name:"Think Like Monk",
+category:"books",
+price:"₹599",
+image:"https://images.unsplash.com/photo-1495446815901-a7297e633e8d",
+rating:"★★★★☆",
+desc:"Mindset improvement book."
+},
+
+{
+name:"Power Of Mind",
+category:"books",
+price:"₹299",
+image:"https://images.unsplash.com/photo-1544947950-fa07a98d237f",
+rating:"★★★★★",
+desc:"Motivational reading book."
+}
+
+];
+
+/* DISPLAY PRODUCTS */
+
+function displayProducts(items){
+
+let productHTML = "";
+
+items.forEach(product=>{
+
+productHTML += `
+
+<div class="card">
+
+<div class="badge">
+HOT
+</div>
+
+<img src="${product.image}">
+
+<div class="card-content">
+
+<h3>${product.name}</h3>
+
+<div class="rating">
+${product.rating}
+</div>
+
+<p class="price">
+${product.price}
+</p>
+
+<p class="desc">
+${product.desc}
+</p>
+
+<button onclick="addCart()">
+Add To Cart
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("products")
+.innerHTML = productHTML;
+
+}
+
+/* FILTER */
+
+function filterProducts(category){
+
+if(category==="all"){
+
+displayProducts(products);
+
+}
+else{
+
+let filtered =
+products.filter(product =>
+product.category===category
+);
+
+displayProducts(filtered);
+
+}
+
+}
+
+/* SEARCH */
+
+function searchProduct(){
+
+let input =
+document.getElementById("search")
+.value
+.toLowerCase();
+
+let filtered =
+products.filter(product =>
+product.name.toLowerCase().includes(input)
+);
+
+displayProducts(filtered);
+
+}
+
+/* CART */
+
+let cart = 0;
+
+function addCart(){
+
+cart++;
+
+document.getElementById("cart")
+.innerHTML = cart;
+
+alert("✅ Product Added To Cart");
+
+}
+
+/* ORDER */
+
+function placeOrder(){
+
+if(cart > 0){
+
+alert("🎉 Order Placed Successfully!");
+
+}
+else{
+
+alert("🛒 Your Cart Is Empty!");
+
+}
+
+}
+
+/* DEFAULT */
+
+displayProducts(products);
+
+</script>
+
+</body>
+</html>
+```
